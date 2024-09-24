@@ -1,5 +1,3 @@
-import { apiLogger, cacheLogger, logger, stderrLogger, timeLogger } from "./logging";
-
 export { printer, printerIO } from "./printerIO";
 
 export {

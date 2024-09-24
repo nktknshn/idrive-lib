@@ -31,7 +31,8 @@ export type Deps =
 
 /** Upload multiple files to the same folder */
 export const uploadMany = (
-  { uploadargs, overwrite, skipTrash, dry }: {
+  { uploadargs, overwrite, skipTrash }: {
+    // TODO dry
     uploadargs: string[];
     overwrite:
       | boolean
