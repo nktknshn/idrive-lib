@@ -3,6 +3,8 @@ import * as LT from "../../../util/localtree";
 import { Path } from "../../../util/path";
 import { makeUploadTaskFromTree } from "./upload-task";
 
+import { describe, expect, it } from "vitest";
+
 const dir = (path: string, forest: LT.LocalTree[] = []): LT.LocalTree => ({
   value: {
     type: "directory",

@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { recursiveDirMapper, shallowDirMapper } from "./fs-mapper";
 
 describe("fs-mapper", () => {

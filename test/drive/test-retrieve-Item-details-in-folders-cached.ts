@@ -1,28 +1,29 @@
-import { pipe } from 'fp-ts/lib/function'
-import * as O from 'fp-ts/Option'
-import * as R from 'fp-ts/Record'
-import * as TE from 'fp-ts/TaskEither'
-import { Cache, DriveLookup } from '../../src/icloud-drive'
-import { enableDebug } from './debug'
-import { executeDrive, fakeicloud, file, folder } from './util/mocked-drive'
+import { pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/Option";
+import * as R from "fp-ts/Record";
+import * as TE from "fp-ts/TaskEither";
+import { describe, expect, it } from "vitest";
+import { Cache, DriveLookup } from "../../src/icloud-drive";
+import { enableDebug } from "./debug";
+import { executeDrive, fakeicloud, file, folder } from "./util/mocked-drive";
 
-enableDebug(false)
+enableDebug(false);
 
-describe('retrieveItemDetailsInFoldersCached', () => {
-  it('removes missing items from the main cache', async () => {
+describe("retrieveItemDetailsInFoldersCached", () => {
+  it("removes missing items from the main cache", async () => {
     const structure0 = fakeicloud(
-      folder({ name: 'folder1' })(
-        folder({ name: 'folder2' })(
-          file({ name: 'file2.txt' }),
+      folder({ name: "folder1" })(
+        folder({ name: "folder2" })(
+          file({ name: "file2.txt" }),
         ),
-        folder({ name: 'folder3' })(
-          file({ name: 'file3.txt' }),
+        folder({ name: "folder3" })(
+          file({ name: "file3.txt" }),
         ),
-        folder({ name: 'folder4' })(
-          file({ name: 'file4.txt' }),
+        folder({ name: "folder4" })(
+          file({ name: "file4.txt" }),
         ),
       ),
-    )
+    );
 
     return pipe(
       executeDrive({
@@ -54,19 +55,19 @@ describe('retrieveItemDetailsInFoldersCached', () => {
           O.some({
             drivewsid: structure0.r.c.folder1.c.folder3.d.drivewsid,
           }),
-        ])
+        ]);
 
         expect(
           state.cache.byDrivewsid[structure0.r.c.folder1.c.folder2.d.drivewsid],
-        ).toBeUndefined()
+        ).toBeUndefined();
 
         expect(
           state.cache.byDrivewsid[structure0.r.c.folder1.c.folder4.d.drivewsid],
-        ).toBeDefined()
+        ).toBeDefined();
       }),
       TE.mapLeft((e) => {
-        expect(false).toBe(true)
+        expect(false).toBe(true);
       }),
-    )
-  })
-})
+    );
+  });
+});

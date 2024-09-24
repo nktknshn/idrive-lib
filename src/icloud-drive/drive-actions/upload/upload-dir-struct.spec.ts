@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { getDirStructTask, getSubdirsPerParent } from "./upload-dir-struct";
 
 describe("getDirStructTask", () => {

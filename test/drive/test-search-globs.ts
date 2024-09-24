@@ -1,9 +1,9 @@
 import { pipe } from "fp-ts/lib/function";
 import * as TE from "fp-ts/TaskEither";
 import micromatch from "micromatch";
+import { describe, expect, it } from "vitest";
 import { Cache, DriveLookup } from "../../src/icloud-drive";
-import { isMatching } from "../../src/util/glob-matching";
-import "./debug";
+import { isMatching } from "../../src/util/glob";
 import { enableDebug } from "./debug";
 import { executeDrive, fakeicloud, file, folder } from "./util/mocked-drive";
 

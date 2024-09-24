@@ -1,6 +1,6 @@
-import { hole } from 'fp-ts/lib/function'
-import { PathLike } from 'fs'
-import { FsType } from '../../../src/util/fs'
+import { hole } from "fp-ts/lib/function";
+import { PathLike } from "fs";
+import { FsType } from "../../../src/util/fs";
 
 export const mockedFs = (): FsType => ({
   fstat: (path: string) => hole(),
@@ -11,4 +11,5 @@ export const mockedFs = (): FsType => ({
   writeFile: (path: string) => hole(),
   rm: (path: PathLike) => hole(),
   createReadStream: (path: PathLike) => hole(),
-})
+  utimes: (path: PathLike) => hole(),
+});
