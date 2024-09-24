@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "target": "es6",
+    "lib": ["es6"],
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "dist/",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    // "types": ["vitest/globals"],
+    "noEmit": true
+  },
+  "exclude": ["./node_modules"]
+}
