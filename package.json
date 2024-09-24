@@ -1,19 +1,17 @@
 {
   "name": "idrive-lib",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Unofficial iCloud Drive API client library",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "./node_modules/.bin/vitest",
-    "build": "rm -rf dist && ./node_modules/.bin/tsc -p tsconfig.build.json && scripts/build.sh",
+    "build": "scripts/build.sh",
+    "prepublishOnly": "echo 'use scripts/build-and-publish.sh instead' && exit 1",
     "lint": "/home/user/.local/node/bin/npx eslint .",
     "clean": "rm -rf dist",
     "typecheck-watch": "./node_modules/.bin/tsc -p tsconfig.build.json -w --noEmit"
   },
-  "files": [
-    "/dist"
-  ],
   "author": {
     "name": "Nikita Kanashin",
     "email": "nikita@kanash.in"
