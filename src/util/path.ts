@@ -1,5 +1,15 @@
-import Path from 'path'
-import { NormalizedPath, normalizePath, npath, stripTrailingSlash } from './normalize-path'
-export { type NormalizedPath, normalizePath, npath, Path, stripTrailingSlash }
+import Path from "path";
 
-export const prependPath = (parent: string) => (kid: string): string => Path.join(parent, kid)
+export {
+  addLeadingSlash,
+  addTrailingSlash,
+  NormalizedPath,
+  normalizePath,
+  normalizePaths,
+  npath,
+  stripTrailingSlash,
+} from "./normalize-path";
+
+export const prependPath = (parent: string) => (kid: string): string => Path.join(parent, kid);
+
+export { Path };

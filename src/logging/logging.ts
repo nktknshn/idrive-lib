@@ -124,9 +124,17 @@ const httpfilelogger = winston.createLogger({
   ],
 });
 
+export const defaultLoggers = [
+  logger,
+  cacheLogger,
+  stderrLogger,
+  apiLogger,
+  timeLogger,
+];
+
 export const initLogging = (
   args: { debug: boolean },
-  loggers: winston.Logger[],
+  loggers: winston.Logger[] = defaultLoggers,
 ): void => {
   for (const logger of loggers) {
     logger.add(

@@ -8,7 +8,8 @@
     "test": "./node_modules/.bin/vitest",
     "build": "rm -rf dist && ./node_modules/.bin/tsc -p tsconfig.build.json && scripts/build.sh",
     "lint": "/home/user/.local/node/bin/npx eslint .",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "typecheck-watch": "./node_modules/.bin/tsc -p tsconfig.build.json -w --noEmit"
   },
   "files": [
     "/dist"
@@ -40,7 +41,7 @@
     "@eslint/js": "^9.9.1",
     "@types/eslint__js": "^8.42.3",
     "dprint": "^0.18.2",
-    "eslint": "^9.9.1",
+    "eslint": "^9.11.1",
     "ts-loader": "^9.5.1",
     "vitest": "^2.1.1",
     "@vitest/coverage-istanbul": "^2.0.5",

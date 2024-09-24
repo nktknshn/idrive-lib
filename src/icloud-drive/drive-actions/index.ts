@@ -9,7 +9,11 @@ export { type Deps as DownloadDeps, downloadShallow } from "./download/download-
 export { listRecursive } from "./ls/ls-recursive";
 export { listRecursiveTree } from "./ls/ls-tree";
 
-export { type ListPathsFile, type ListPathsFolder, listShallow } from "./ls/ls-shallow";
+export {
+  listShallow,
+  type ListShallowFile as ListPathsFile,
+  type ListShallowFolder as ListPathsFolder,
+} from "./ls/ls-shallow";
 
 export { type Deps as DepsEdit, edit } from "./edit";
 export { type Deps as DepsMkdir, mkdir } from "./mkdir";
@@ -21,3 +25,11 @@ export { uploadMany } from "./upload/upload-files";
 export { type Deps as DepsUploadFolder, uploadFolder } from "./upload/upload-folder";
 
 export { type Deps as DepsDownloadFiles, downloadFiles } from "./download/download-files";
+
+export type {
+  ListRecursiveTreeResult,
+  ListShallowFile,
+  ListShallowFolder,
+  ListShallowInvalid,
+  ListShallowResult,
+} from "./ls";

@@ -2,7 +2,7 @@ import * as A from "fp-ts/lib/Array";
 import { pipe } from "fp-ts/lib/function";
 import * as TR from "fp-ts/lib/Tree";
 import { getDirectoryStructure } from "../../../util/get-directory-structure";
-import { isMatchingAny } from "../../../util/glob-matching";
+import { isMatchingAny } from "../../../util/glob";
 import * as LT from "../../../util/localtree";
 import { UploadFolderTask } from "./types";
 

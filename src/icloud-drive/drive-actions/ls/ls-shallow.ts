@@ -4,16 +4,16 @@ import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
 import micromatch from "micromatch";
 
 import { err } from "../../../util/errors";
-import { includesGlobstar } from "../../../util/glob-matching";
+import { includesGlobstar } from "../../../util/glob";
 import { normalizePath } from "../../../util/normalize-path";
 import { NEA } from "../../../util/types";
 import { DriveLookup, Types } from "../..";
 import { findInParentGlob } from "../../util/drive-helpers";
 import * as GetByPath from "../../util/get-by-path-types";
 
-export type ListPathResult = ListPathsFolder | ListPathsFile | ListPathInvalid;
+export type ListShallowResult = ListShallowFolder | ListShallowFile | ListShallowInvalid;
 
-export type ListPathsFolder = {
+export type ListShallowFolder = {
   isFile: false;
   valid: true;
   path: string;
@@ -23,7 +23,7 @@ export type ListPathsFolder = {
   validation: GetByPath.PathValidFolder<Types.Root>;
 };
 
-export type ListPathsFile = {
+export type ListShallowFile = {
   isFile: true;
   valid: true;
   path: string;
@@ -31,7 +31,7 @@ export type ListPathsFile = {
   validation: GetByPath.PathValidFile<Types.Root>;
 };
 
-export type ListPathInvalid = {
+export type ListShallowInvalid = {
   valid: false;
   validation: GetByPath.PathInvalid<Types.Root>;
   path: string;
@@ -41,7 +41,7 @@ const result = (
   path: string,
   scan: micromatch.ScanInfo,
   res: GetByPath.Result<Types.Root>,
-): ListPathResult => {
+): ListShallowResult => {
   if (GetByPath.isInvalidPath(res)) {
     return { valid: false, path, validation: res };
   } else {
@@ -64,7 +64,7 @@ const result = (
 /** Shallow listing of paths. It doesn't fail some of the paths are not valid. */
 export const listShallow = (
   { paths, trash }: { paths: NA.NonEmptyArray<string>; trash: boolean },
-): DriveLookup.Lookup<NEA<ListPathResult>, DriveLookup.Deps> => {
+): DriveLookup.Lookup<NEA<ListShallowResult>, DriveLookup.Deps> => {
   const scanned = pipe(paths, NA.map(micromatch.scan));
   const basepaths = pipe(scanned, NA.map(_ => _.base), NA.map(normalizePath));
 

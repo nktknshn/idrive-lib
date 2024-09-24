@@ -3,7 +3,7 @@ import { pipe } from "fp-ts/lib/function";
 import { guardProp } from "../../../util/guards";
 import { DriveTree, Types } from "../..";
 
-import { isMatchingAny } from "../../../util/glob-matching";
+import { isMatchingAny } from "../../../util/glob";
 import { DownloadItem, DownloadTask } from "./types";
 
 type TreeFilterIncludeExclude = (opts: {

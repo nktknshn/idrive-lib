@@ -8,7 +8,7 @@ import micromatch from "micromatch";
 
 import { loggerIO } from "../../../logging";
 import { SrteUtils } from "../../../util";
-import { isGlobstar, isMatching } from "../../../util/glob-matching";
+import { isGlobstar, isMatching } from "../../../util/glob";
 import { guardSnd } from "../../../util/guards";
 import { NormalizedPath, normalizePath, Path } from "../../../util/path";
 import { NEA } from "../../../util/types";
@@ -90,8 +90,8 @@ export const searchGlobs = (
           // if the input glob is a plain path to a file, just compare the paths
           !scan.isGlob && isMatching(basepath, glob, options)
             ? [{ path: basepath, item: file }]
-            : // otherwise it's an invalid path like /test.txt/**
-              [],
+            // otherwise it's an invalid path like /test.txt/**
+            : [],
         // handle trees
         flow(
           DriveTree.flattenTreeWithItems(Path.dirname(basepath)),

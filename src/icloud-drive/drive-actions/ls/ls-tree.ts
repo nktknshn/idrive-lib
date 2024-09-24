@@ -4,7 +4,7 @@ import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
 import * as O from "fp-ts/Option";
 import micromatch from "micromatch";
 
-import { isMatching } from "../../../util/glob-matching";
+import { isMatching } from "../../../util/glob";
 import { addLeadingSlash, normalizePath } from "../../../util/normalize-path";
 import { Path } from "../../../util/path";
 import * as TreeUtil from "../../../util/tree";
