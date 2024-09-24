@@ -1,193 +1,193 @@
-import { EmptyObject } from '../util/types'
+import { EmptyObject } from "../util/types";
 
 /** Contains information about the icloud account. */
 export interface AccountData {
-  dsInfo: DsInfo
-  hasMinimumDeviceForPhotosWeb: boolean
-  iCDPEnabled: boolean
-  webservices: Webservices
-  pcsEnabled: boolean
-  configBag: ConfigBag
-  hsaTrustedBrowser: boolean
-  appsOrder: string[]
-  version: number
-  isExtendedLogin: boolean
-  pcsServiceIdentitiesIncluded: boolean
-  hsaChallengeRequired: boolean
-  requestInfo: RequestInfo
-  pcsDeleted: boolean
-  iCloudInfo: ICloudInfo
-  apps: Apps
+  dsInfo: DsInfo;
+  hasMinimumDeviceForPhotosWeb: boolean;
+  iCDPEnabled: boolean;
+  webservices: Webservices;
+  pcsEnabled: boolean;
+  configBag: ConfigBag;
+  hsaTrustedBrowser: boolean;
+  appsOrder: string[];
+  version: number;
+  isExtendedLogin: boolean;
+  pcsServiceIdentitiesIncluded: boolean;
+  hsaChallengeRequired: boolean;
+  requestInfo: RequestInfo;
+  pcsDeleted: boolean;
+  iCloudInfo: ICloudInfo;
+  apps: Apps;
 }
 
 export interface Apps {
-  calendar: EmptyObject
-  reminders: EmptyObject
-  keynote: Keynote
-  settings: Find
-  mail: Mail
-  numbers: Keynote
-  photos: EmptyObject
-  pages: Keynote
-  notes3: EmptyObject
-  find: Find
-  iclouddrive: EmptyObject
-  newspublisher: Newspublisher
-  fmf?: EmptyObject
-  contacts: EmptyObject
+  calendar: EmptyObject;
+  reminders: EmptyObject;
+  keynote: Keynote;
+  settings: Find;
+  mail: Mail;
+  numbers: Keynote;
+  photos: EmptyObject;
+  pages: Keynote;
+  notes3: EmptyObject;
+  find: Find;
+  iclouddrive: EmptyObject;
+  newspublisher: Newspublisher;
+  fmf?: EmptyObject;
+  contacts: EmptyObject;
 }
 
 export interface Find {
-  canLaunchWithOneFactor: boolean
+  canLaunchWithOneFactor: boolean;
 }
 
 export interface Keynote {
-  isQualifiedForBeta: boolean
+  isQualifiedForBeta: boolean;
 }
 
 export interface Mail {
-  isCKMail: boolean
+  isCKMail: boolean;
 }
 
 export interface Newspublisher {
-  isHidden: boolean
+  isHidden: boolean;
 }
 
 export interface ConfigBag {
-  urls: Urls
-  accountCreateEnabled: string
+  urls: Urls;
+  accountCreateEnabled: string;
 }
 
 export interface Urls {
-  accountCreateUI: string
-  accountLoginUI: string
-  accountLogin: string
-  accountRepairUI: string
-  downloadICloudTerms: string
-  repairDone: string
-  accountAuthenticateUI: string
-  vettingUrlForEmail: string
-  accountCreate: string
-  getICloudTerms: string
-  vettingUrlForPhone: string
+  accountCreateUI: string;
+  accountLoginUI: string;
+  accountLogin: string;
+  accountRepairUI: string;
+  downloadICloudTerms: string;
+  repairDone: string;
+  accountAuthenticateUI: string;
+  vettingUrlForEmail: string;
+  accountCreate: string;
+  getICloudTerms: string;
+  vettingUrlForPhone: string;
 }
 
 export interface DsInfo {
-  lastName: string
-  iCDPEnabled: boolean
-  tantorMigrated: boolean
-  dsid: string
-  hsaEnabled: boolean
-  ironcadeMigrated: boolean
-  locale: string
-  brZoneConsolidated: boolean
-  isManagedAppleID: boolean
-  'gilligan-invited': boolean
-  appleIdAliases: unknown[]
-  hsaVersion: number
-  isPaidDeveloper: boolean
-  countryCode: string
-  notificationId: string
-  primaryEmailVerified: boolean
-  aDsID: string
-  locked: boolean
-  hasICloudQualifyingDevice: boolean
-  primaryEmail: string
-  appleIdEntries: AppleIDEntry[]
-  'gilligan-enabled': boolean
-  fullName: string
-  languageCode: string
-  appleId: string
-  hasUnreleasedOS: boolean
-  firstName: string
-  iCloudAppleIdAlias: string
-  notesMigrated: boolean
-  beneficiaryInfo: BeneficiaryInfo
-  hasPaymentInfo: boolean
-  pcsDeleted: boolean
-  appleIdAlias: string
-  brMigrated: boolean
-  statusCode: number
-  familyEligible: boolean
-  isCustomDomainsFeatureAvailable?: boolean
-  isHideMyEmailFeatureAvailable?: boolean
+  lastName: string;
+  iCDPEnabled: boolean;
+  tantorMigrated: boolean;
+  dsid: string;
+  hsaEnabled: boolean;
+  ironcadeMigrated: boolean;
+  locale: string;
+  brZoneConsolidated: boolean;
+  isManagedAppleID: boolean;
+  "gilligan-invited": boolean;
+  appleIdAliases: unknown[];
+  hsaVersion: number;
+  isPaidDeveloper: boolean;
+  countryCode: string;
+  notificationId: string;
+  primaryEmailVerified: boolean;
+  aDsID: string;
+  locked: boolean;
+  hasICloudQualifyingDevice: boolean;
+  primaryEmail: string;
+  appleIdEntries: AppleIDEntry[];
+  "gilligan-enabled": boolean;
+  fullName: string;
+  languageCode: string;
+  appleId: string;
+  hasUnreleasedOS: boolean;
+  firstName: string;
+  iCloudAppleIdAlias: string;
+  notesMigrated: boolean;
+  beneficiaryInfo: BeneficiaryInfo;
+  hasPaymentInfo: boolean;
+  pcsDeleted: boolean;
+  appleIdAlias: string;
+  brMigrated: boolean;
+  statusCode: number;
+  familyEligible: boolean;
+  isCustomDomainsFeatureAvailable?: boolean;
+  isHideMyEmailFeatureAvailable?: boolean;
 }
 
 export interface AppleIDEntry {
-  isPrimary: boolean
-  type: string
-  value: string
+  isPrimary: boolean;
+  type: string;
+  value: string;
 }
 
 export interface BeneficiaryInfo {
-  isBeneficiary: boolean
+  isBeneficiary: boolean;
 }
 
 export interface ICloudInfo {
-  SafariBookmarksHasMigratedToCloudKit: boolean
+  SafariBookmarksHasMigratedToCloudKit: boolean;
 }
 
 export interface RequestInfo {
-  country: string
-  timeZone: string
+  country: string;
+  timeZone: string;
 }
 
 export interface Webservices {
-  reminders: Archivews
-  ckdatabasews: Ckdatabasews
-  photosupload: Ckdatabasews
-  photos: Ckdatabasews
-  drivews: Ckdatabasews
-  uploadimagews: Archivews
-  schoolwork: EmptyObject
-  cksharews: Archivews
-  findme: Archivews
-  ckdeviceservice: Ckdeviceservice
-  iworkthumbnailws: Archivews
-  calendar: Archivews
-  docws: Ckdatabasews
-  settings: Archivews
-  ubiquity: Archivews
-  streams: Archivews
-  keyvalue: Archivews
-  archivews: Archivews
-  push: Archivews
-  iwmb: Archivews
-  iworkexportws: Archivews
-  geows: Archivews
-  account: Account
-  fmf?: Archivews
-  contacts: Archivews
+  reminders: Archivews;
+  ckdatabasews: Ckdatabasews;
+  photosupload: Ckdatabasews;
+  photos: Ckdatabasews;
+  drivews: Ckdatabasews;
+  uploadimagews: Archivews;
+  schoolwork: EmptyObject;
+  cksharews: Archivews;
+  findme: Archivews;
+  ckdeviceservice: Ckdeviceservice;
+  iworkthumbnailws: Archivews;
+  calendar: Archivews;
+  docws: Ckdatabasews;
+  settings: Archivews;
+  ubiquity: Archivews;
+  streams: Archivews;
+  keyvalue: Archivews;
+  archivews: Archivews;
+  push: Archivews;
+  iwmb: Archivews;
+  iworkexportws: Archivews;
+  geows: Archivews;
+  account: Account;
+  fmf?: Archivews;
+  contacts: Archivews;
 }
 
 export interface Account {
-  iCloudEnv: ICloudEnv
-  url: string
-  status: Status
+  iCloudEnv: ICloudEnv;
+  url: string;
+  status: Status;
 }
 
 export interface ICloudEnv {
-  shortId: string
-  vipSuffix: string
+  shortId: string;
+  vipSuffix: string;
 }
 
 // export enum Status {
 //   Active = 'active',
 // }
-export type Status = 'active'
+export type Status = "active";
 
 export interface Archivews {
-  url: string
-  status: Status
+  url: string;
+  status: Status;
 }
 
 export interface Ckdatabasews {
-  pcsRequired: boolean
-  url: string
-  status: Status
-  uploadUrl?: string
+  pcsRequired: boolean;
+  url: string;
+  status: Status;
+  uploadUrl?: string;
 }
 
 export interface Ckdeviceservice {
-  url: string
+  url: string;
 }

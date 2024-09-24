@@ -292,25 +292,25 @@ const handleInvalidPaths = <R extends Types.Root>(
   };
 
   const handleFiles = <R extends Types.Root>() =>
-    (
-      [item, [rest, partial]]: [
-        O.Some<Types.DriveChildrenItemFile>,
-        [string[], GetByPath.PathInvalid<R>],
-      ],
-    ): GetByPath.PathValidation<R> => {
-      return pipe(
-        rest,
-        A.match(
-          (): GetByPath.PathValid<R> => GetByPath.validPath(partial.details, item),
-          (rest): GetByPath.PathValidation<R> => ({
-            valid: false,
-            error: ItemIsNotFolderError.create(`item is not folder`),
-            details: partial.details,
-            rest: NA.concat([Types.fileName(item.value)], rest),
-          }),
-        ),
-      );
-    };
+  (
+    [item, [rest, partial]]: [
+      O.Some<Types.DriveChildrenItemFile>,
+      [string[], GetByPath.PathInvalid<R>],
+    ],
+  ): GetByPath.PathValidation<R> => {
+    return pipe(
+      rest,
+      A.match(
+        (): GetByPath.PathValid<R> => GetByPath.validPath(partial.details, item),
+        (rest): GetByPath.PathValidation<R> => ({
+          valid: false,
+          error: ItemIsNotFolderError.create(`item is not folder`),
+          details: partial.details,
+          rest: NA.concat([Types.fileName(item.value)], rest),
+        }),
+      ),
+    );
+  };
 
   const handleFoundItems = <R extends Types.Root>(
     found: NEA<[O.Some<Types.DriveChildrenItem>, [string[], GetByPath.PathInvalid<R>]]>,

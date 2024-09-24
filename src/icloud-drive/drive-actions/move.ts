@@ -1,38 +1,38 @@
-import { pipe } from 'fp-ts/lib/function'
-import * as NA from 'fp-ts/lib/NonEmptyArray'
-import * as SRTE from 'fp-ts/lib/StateReaderTaskEither'
-import { err } from '../../util/errors'
-import { parseFilename } from '../../util/filename'
-import { normalizePath } from '../../util/path'
-import { NEA } from '../../util/types'
-import { DriveLookup } from '..'
-import { DepApiMethod, DriveApiMethods } from '../drive-api'
-import { MoveItemsResponse, RenameResponse } from '../drive-requests'
-import * as T from '../drive-types'
-import * as V from '../util/get-by-path-types'
+import { pipe } from "fp-ts/lib/function";
+import * as NA from "fp-ts/lib/NonEmptyArray";
+import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
+import { err } from "../../util/errors";
+import { parseFilename } from "../../util/filename";
+import { normalizePath } from "../../util/path";
+import { NEA } from "../../util/types";
+import { DriveLookup } from "..";
+import { DepApiMethod, DriveApiMethods } from "../drive-api";
+import { MoveItemsResponse, RenameResponse } from "../drive-requests";
+import * as T from "../drive-types";
+import * as V from "../util/get-by-path-types";
 
 export type DepsMove =
   & DriveLookup.Deps
-  & DepApiMethod<'moveItems'>
-  & DepApiMethod<'renameItems'>
+  & DepApiMethod<"moveItems">
+  & DepApiMethod<"renameItems">;
 
 /**
  * Move a file or a directory
  */
 export const move = ({ srcpath, dstpath }: {
-  srcpath: string
-  dstpath: string
+  srcpath: string;
+  dstpath: string;
 }): DriveLookup.Lookup<MoveItemsResponse | RenameResponse, DepsMove> => {
-  const nsrc = normalizePath(srcpath)
-  const ndst = normalizePath(dstpath)
+  const nsrc = normalizePath(srcpath);
+  const ndst = normalizePath(dstpath);
 
   return pipe(
     DriveLookup.getByPathsDocwsroot([nsrc, ndst]),
-    SRTE.bindTo('srcdst'),
+    SRTE.bindTo("srcdst"),
     SRTE.chain(handle),
     // SRTE.map((res) => `Statuses.: ${JSON.stringify(res.items.map(_ => _.status))}`),
-  )
-}
+  );
+};
 
 /**
   Dstitem must be either:
@@ -42,46 +42,46 @@ export const move = ({ srcpath, dstpath }: {
 */
 const handle = (
   { srcdst: [srcitem, dstitem] }: {
-    srcdst: NEA<V.PathValidation<T.DetailsDocwsRoot>>
+    srcdst: NEA<V.PathValidation<T.DetailsDocwsRoot>>;
   },
 ): DriveLookup.Lookup<MoveItemsResponse | RenameResponse, DepsMove> => {
   if (!srcitem.valid) {
-    return DriveLookup.errString(`src item was not found: ${V.showGetByPathResult(srcitem)}`)
+    return DriveLookup.errString(`src item was not found: ${V.showGetByPathResult(srcitem)}`);
   }
 
-  const src = V.pathTarget(srcitem)
+  const src = V.pathTarget(srcitem);
 
   if (!T.isNotRootDetails(src)) {
-    return DriveLookup.errString(`src cant be root`)
+    return DriveLookup.errString(`src cant be root`);
   }
 
   if (dstitem.valid) {
-    const dst = V.pathTarget(dstitem)
+    const dst = V.pathTarget(dstitem);
 
     if (!T.isDetails(dst)) {
-      return DriveLookup.errString(`dst is a file`)
+      return DriveLookup.errString(`dst is a file`);
     }
 
-    return caseMove(src, dst)
+    return caseMove(src, dst);
   }
 
   if (
     V.eq().equals(dstitem.details, srcitem.details)
     && dstitem.rest.length == 1
   ) {
-    const fname = NA.head(dstitem.rest)
-    return caseRename(src, fname)
+    const fname = NA.head(dstitem.rest);
+    return caseRename(src, fname);
   }
 
   if (dstitem.rest.length == 1) {
-    const dst = NA.last(dstitem.details)
-    const fname = NA.head(dstitem.rest)
+    const dst = NA.last(dstitem.details);
+    const fname = NA.head(dstitem.rest);
 
-    return caseMoveAndRename(src, dst, fname)
+    return caseMoveAndRename(src, dst, fname);
   }
 
-  return SRTE.left(err(`invalid dstitem`))
-}
+  return SRTE.left(err(`invalid dstitem`));
+};
 
 const caseMove = (
   src: T.NonRootDetails | T.DriveChildrenItemFile,
@@ -90,8 +90,8 @@ const caseMove = (
   return DriveApiMethods.moveItems<DriveLookup.State>({
     destinationDrivewsId: dst.drivewsid,
     items: [{ drivewsid: src.drivewsid, etag: src.etag }],
-  })
-}
+  });
+};
 
 const caseRename = (
   srcitem: T.NonRootDetails | T.DriveChildrenItemFile,
@@ -101,12 +101,12 @@ const caseRename = (
     items: [
       { drivewsid: srcitem.drivewsid, ...parseFilename(name), etag: srcitem.etag },
     ],
-  })
-}
+  });
+};
 
 const caseMoveAndRename = (
   src: T.NonRootDetails | T.DriveChildrenItemFile,
-  dst: (T.Details | T.DetailsTrashRoot),
+  dst: T.Details | T.DetailsTrashRoot,
   name: string,
 ): DriveLookup.Lookup<RenameResponse, DepsMove> => {
   return pipe(
@@ -123,5 +123,5 @@ const caseMoveAndRename = (
         ],
       })
     ),
-  )
-}
+  );
+};

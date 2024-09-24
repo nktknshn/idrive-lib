@@ -1,13 +1,13 @@
-import { flow, pipe } from 'fp-ts/lib/function'
-import * as O from 'fp-ts/lib/Option'
-import * as SRTE from 'fp-ts/lib/StateReaderTaskEither'
+import { flow, pipe } from "fp-ts/lib/function";
+import * as O from "fp-ts/lib/Option";
+import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
 
-import * as t from 'io-ts'
-import { countryCode } from '../../defaults'
-import * as AR from '../../icloud-core/icloud-request'
-import { logAPI } from '../../icloud-core/icloud-request/log'
-import { err } from '../../util/errors'
-import { type AccountData } from '../type-accountdata'
+import * as t from "io-ts";
+import { countryCode } from "../../defaults";
+import * as AR from "../../icloud-core/icloud-request";
+import { logAPI } from "../../icloud-core/icloud-request/log";
+import { err } from "../../util/errors";
+import { type AccountData } from "../type-accountdata";
 
 export function requestAccoutLogin<S extends AR.BaseState>(): AR.ApiRequest<AccountData, S> {
   return pipe(
@@ -18,7 +18,7 @@ export function requestAccoutLogin<S extends AR.BaseState>(): AR.ApiRequest<Acco
         AR.buildRequest<S>((
           { state: { session } },
         ) => ({
-          method: 'POST',
+          method: "POST",
           url: `https://setup.icloud.com/setup/ws/1/accountLogin`,
           options: {
             addClientInfo: true,
@@ -41,6 +41,6 @@ export function requestAccoutLogin<S extends AR.BaseState>(): AR.ApiRequest<Acco
         )),
       )
     ),
-    logAPI('requestAccoutLogin'),
-  )
+    logAPI("requestAccoutLogin"),
+  );
 }

@@ -1,22 +1,22 @@
-import * as t from 'io-ts'
-import * as AR from '../../icloud-core/icloud-request'
-import { AuthenticatedState } from '../../icloud-core/icloud-request'
-import { logAPI } from '../../icloud-core/icloud-request/log'
+import * as t from "io-ts";
+import * as AR from "../../icloud-core/icloud-request";
+import { AuthenticatedState } from "../../icloud-core/icloud-request";
+import { logAPI } from "../../icloud-core/icloud-request/log";
 
 export interface MoveItemToTrashResponse {
-  items: { drivewsid: string }[]
+  items: { drivewsid: string }[];
 }
 
 export const moveItemsToTrash = <S extends AuthenticatedState>({ items, trash = false }: {
-  items: { drivewsid: string; etag: string }[]
-  trash?: boolean
+  items: { drivewsid: string; etag: string }[];
+  trash?: boolean;
 }): AR.ApiRequest<MoveItemToTrashResponse, S> =>
-  logAPI('moveItemsToTrash')(
+  logAPI("moveItemsToTrash")(
     AR.basicJsonRequest(
       ({ state: { accountData } }) => ({
-        method: 'POST',
+        method: "POST",
         url: `${accountData.webservices.drivews.url}/${
-          trash ? 'moveItemsToTrash' : 'deleteItems'
+          trash ? "moveItemsToTrash" : "deleteItems"
         }?dsid=${accountData.dsInfo.dsid}`,
         options: {
           addClientInfo: true,
@@ -34,4 +34,4 @@ export const moveItemsToTrash = <S extends AuthenticatedState>({ items, trash = 
           MoveItemToTrashResponse
         >,
     ),
-  )
+  );

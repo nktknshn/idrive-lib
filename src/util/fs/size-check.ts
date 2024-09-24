@@ -33,18 +33,18 @@ export const assertFileSize = (
     maximumSize?: number;
   },
 ): RTE.ReaderTaskEither<Deps, AssetFileSizeError, void> =>
-  ({ fs }) =>
-    pipe(
-      fs.fstat(path),
-      TE.mapLeft(e => isEnoentError(e) ? FileNotFoundError.create(path) : e),
-      TE.chainW((a) =>
-        a.isFile()
-          ? TE.right(a)
-          : TE.left(FileInvalidError.create(path))
-      ),
-      TE.chainW(a =>
-        a.size >= minimumSize && a.size <= maximumSize
-          ? TE.right(constVoid())
-          : TE.left(FileSizeError.create(`File size ${a.size} is not in range [${minimumSize}, ${maximumSize}].`))
-      ),
-    );
+({ fs }) =>
+  pipe(
+    fs.fstat(path),
+    TE.mapLeft(e => isEnoentError(e) ? FileNotFoundError.create(path) : e),
+    TE.chainW((a) =>
+      a.isFile()
+        ? TE.right(a)
+        : TE.left(FileInvalidError.create(path))
+    ),
+    TE.chainW(a =>
+      a.size >= minimumSize && a.size <= maximumSize
+        ? TE.right(constVoid())
+        : TE.left(FileSizeError.create(`File size ${a.size} is not in range [${minimumSize}, ${maximumSize}].`))
+    ),
+  );

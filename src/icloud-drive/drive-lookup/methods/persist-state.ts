@@ -1,6 +1,6 @@
-import { constVoid, pipe } from 'fp-ts/lib/function'
-import * as SRTE from 'fp-ts/lib/StateReaderTaskEither'
-import { Deps, Lookup } from '../drive-lookup'
+import { constVoid, pipe } from "fp-ts/lib/function";
+import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
+import { Deps, Lookup } from "../drive-lookup";
 
 export const persisState = <A>(ma: Lookup<A>): Lookup<A> =>
   pipe(
@@ -10,4 +10,4 @@ export const persisState = <A>(ma: Lookup<A>): Lookup<A> =>
         ({ hookPesistState }: Deps) => hookPesistState ?? SRTE.of(constVoid()),
       )
     ),
-  )
+  );

@@ -207,6 +207,6 @@ export const asEither = <R extends T.Root, E>(
 ): (
   path: Result<R>,
 ) => E.Either<E, R | T.DetailsFolder | T.DetailsAppLibrary | T.DriveChildrenItemFile> =>
-  (path: Result<R>) => {
-    return path.valid === true ? E.of(pathTarget(path)) : E.left(onLeft(path));
-  };
+(path: Result<R>) => {
+  return path.valid === true ? E.of(pathTarget(path)) : E.left(onLeft(path));
+};

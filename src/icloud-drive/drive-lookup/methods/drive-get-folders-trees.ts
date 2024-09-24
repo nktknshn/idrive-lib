@@ -1,26 +1,26 @@
-import * as A from 'fp-ts/lib/Array'
-import { apply, pipe } from 'fp-ts/lib/function'
-import * as NA from 'fp-ts/lib/NonEmptyArray'
-import * as O from 'fp-ts/lib/Option'
-import * as R from 'fp-ts/lib/Record'
-import * as SRTE from 'fp-ts/lib/StateReaderTaskEither'
-import { loggerIO } from '../../../logging/loggerIO'
-import { SrteUtils } from '../../../util'
-import { NEA } from '../../../util/types'
-import { DriveLookup } from '../..'
-import * as T from '../../drive-types'
-import { deepFolder, DriveFolderTree, shallowFolder } from '../../util/drive-folder-tree'
-import { equalsDrivewsId } from '../../util/drive-helpers'
+import * as A from "fp-ts/lib/Array";
+import { apply, pipe } from "fp-ts/lib/function";
+import * as NA from "fp-ts/lib/NonEmptyArray";
+import * as O from "fp-ts/lib/Option";
+import * as R from "fp-ts/lib/Record";
+import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
+import { loggerIO } from "../../../logging/loggerIO";
+import { SrteUtils } from "../../../util";
+import { NEA } from "../../../util/types";
+import { DriveLookup } from "../..";
+import * as T from "../../drive-types";
+import { deepFolder, DriveFolderTree, shallowFolder } from "../../util/drive-folder-tree";
+import { equalsDrivewsId } from "../../util/drive-helpers";
 
 /** If depth is 0 returns shallowFolder(details) */
 export function getFoldersTrees(
   folders: NEA<T.NonRootDetails>,
   depth: number,
-): DriveLookup.Lookup<NEA<DriveFolderTree<T.NonRootDetails>>>
+): DriveLookup.Lookup<NEA<DriveFolderTree<T.NonRootDetails>>>;
 export function getFoldersTrees<R extends T.Root>(
   folders: NEA<R | T.NonRootDetails>,
   depth: number,
-): DriveLookup.Lookup<NEA<DriveFolderTree<R | T.NonRootDetails>>>
+): DriveLookup.Lookup<NEA<DriveFolderTree<R | T.NonRootDetails>>>;
 export function getFoldersTrees<R extends T.Root | T.NonRootDetails>(
   folders: NEA<R | T.NonRootDetails>,
   depth: number,
@@ -29,9 +29,9 @@ export function getFoldersTrees<R extends T.Root | T.NonRootDetails>(
     folders: NEA<R | T.NonRootDetails>,
     depth: number,
   ): DriveLookup.Lookup<NEA<DriveFolderTree<R>>> => {
-    const subfolders = getSubfolders(folders)
-    const doGoDeeper = depth > 0 && subfolders.length > 0
-    const depthExceed = subfolders.length > 0 && depth == 0
+    const subfolders = getSubfolders(folders);
+    const doGoDeeper = depth > 0 && subfolders.length > 0;
+    const depthExceed = subfolders.length > 0 && depth == 0;
 
     return pipe(
       A.isNonEmpty(subfolders) && doGoDeeper
@@ -60,12 +60,12 @@ export function getFoldersTrees<R extends T.Root | T.NonRootDetails>(
         : depthExceed
         ? SRTE.of(pipe(folders, NA.map(shallowFolder)))
         : SRTE.of(pipe(folders, NA.map(f => deepFolder(f, [])))),
-    )
-  }
+    );
+  };
 
   return pipe(
     go(folders, depth),
-  )
+  );
 }
 
 /** Extract subfolders from a list of folders */
@@ -74,7 +74,7 @@ const getSubfolders = (folders: T.Details[]): (T.FolderLikeItem)[] =>
     folders,
     A.map(folder => pipe(folder.items, A.filter(T.isFolderLikeItem))),
     A.flatten,
-  )
+  );
 
 const zipWithChildren = <T extends T.Details, R extends T.Details>(
   folders: NEA<T>,
@@ -92,11 +92,11 @@ const zipWithChildren = <T extends T.Details, R extends T.Details>(
         ),
       ] as const
     ),
-  )
+  );
 
-const groupBy = <T>(f: (item: T) => string): (items: T[]) => Record<string, T[]> =>
-  (items: T[]): Record<string, T[]> => {
-    let result: Record<string, T[]> = {}
+const groupBy =
+  <T>(f: (item: T) => string): (items: T[]) => Record<string, T[]> => (items: T[]): Record<string, T[]> => {
+    let result: Record<string, T[]> = {};
 
     for (const el of items) {
       result = pipe(
@@ -105,8 +105,8 @@ const groupBy = <T>(f: (item: T) => string): (items: T[]) => Record<string, T[]>
         O.getOrElse((): T[] => []),
         children => R.upsertAt(f(el), [...children, el]),
         apply(result),
-      )
+      );
     }
 
-    return result
-  }
+    return result;
+  };

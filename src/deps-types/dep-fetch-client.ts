@@ -1,3 +1,3 @@
-import { FetchClientEither } from '../util/http/fetch-client'
+import { FetchClientEither } from "../util/http/fetch-client";
 
-export type DepFetchClient = { fetchClient: FetchClientEither }
+export type DepFetchClient = { fetchClient: FetchClientEither };

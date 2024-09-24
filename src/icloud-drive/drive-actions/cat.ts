@@ -1,26 +1,26 @@
-import { pipe } from 'fp-ts/lib/function'
-import * as RTE from 'fp-ts/lib/ReaderTaskEither'
-import * as SRTE from 'fp-ts/lib/StateReaderTaskEither'
-import * as O from 'fp-ts/Option'
+import { pipe } from "fp-ts/lib/function";
+import * as RTE from "fp-ts/lib/ReaderTaskEither";
+import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
+import * as O from "fp-ts/Option";
 
-import { DepFetchClient } from '../../deps-types'
-import { err } from '../../util/errors'
-import { getUrlStream } from '../../util/http/getUrlStream'
-import { normalizePath } from '../../util/normalize-path'
-import { consumeStreamToString } from '../../util/util'
-import { DriveLookup } from '..'
-import { DepApiMethod, DriveApiMethods } from '../drive-api'
-import { isFile } from '../drive-types'
+import { DepFetchClient } from "../../deps-types";
+import { err } from "../../util/errors";
+import { getUrlStream } from "../../util/http/getUrlStream";
+import { normalizePath } from "../../util/normalize-path";
+import { consumeStreamToString } from "../../util/util";
+import { DriveLookup } from "..";
+import { DepApiMethod, DriveApiMethods } from "../drive-api";
+import { isFile } from "../drive-types";
 
 export type Deps =
   & DriveLookup.Deps
-  & DepApiMethod<'download'>
-  & DepFetchClient
+  & DepApiMethod<"download">
+  & DepFetchClient;
 
 export const cat = (
   { path }: { path: string },
 ): DriveLookup.Lookup<string, Deps> => {
-  const npath = pipe(path, normalizePath)
+  const npath = pipe(path, normalizePath);
 
   return pipe(
     DriveLookup.getByPathStrictDocwsroot(npath),
@@ -35,5 +35,5 @@ export const cat = (
         ),
       )
     ),
-  )
-}
+  );
+};

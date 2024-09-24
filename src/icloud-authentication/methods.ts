@@ -1,9 +1,9 @@
-import { pipe } from 'fp-ts/lib/function'
-import * as RTE from 'fp-ts/lib/ReaderTaskEither'
-import * as SRTE from 'fp-ts/lib/StateReaderTaskEither'
-import { DepAuthenticateSession } from '../deps-types'
-import { BaseState } from '../icloud-core/icloud-request'
-import { AccountData } from './type-accountdata'
+import { pipe } from "fp-ts/lib/function";
+import * as RTE from "fp-ts/lib/ReaderTaskEither";
+import * as SRTE from "fp-ts/lib/StateReaderTaskEither";
+import { DepAuthenticateSession } from "../deps-types";
+import { BaseState } from "../icloud-core/icloud-request";
+import { AccountData } from "./type-accountdata";
 
 export const authenticateSession = <S extends BaseState>(): SRTE.StateReaderTaskEither<
   S,
@@ -13,7 +13,7 @@ export const authenticateSession = <S extends BaseState>(): SRTE.StateReaderTask
 > =>
   SRTE.asksStateReaderTaskEitherW(
     (_: DepAuthenticateSession) => _.authenticateSession<S>(),
-  )
+  );
 
 export const authenticateState = <S extends BaseState>(
   state: S,
@@ -25,4 +25,4 @@ export const authenticateState = <S extends BaseState>(
   pipe(
     authenticateSession<S>()(state),
     RTE.map(([accountData, state]) => ({ ...state, accountData })),
-  )
+  );

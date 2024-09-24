@@ -1,18 +1,18 @@
-import { constVoid, pipe } from 'fp-ts/lib/function'
-import * as RTE from 'fp-ts/lib/ReaderTaskEither'
-import { DepFs } from '../../deps-types'
-import { loggerIO } from '../../logging'
-import { debugTimeRTE } from '../../logging/debug-time'
-import { ReadJsonFileError } from '../../util/files'
-import { Cache } from '..'
+import { constVoid, pipe } from "fp-ts/lib/function";
+import * as RTE from "fp-ts/lib/ReaderTaskEither";
+import { DepFs } from "../../deps-types";
+import { loggerIO } from "../../logging";
+import { debugTimeRTE } from "../../logging/debug-time";
+import { ReadJsonFileError } from "../../util/files";
+import { Cache } from "..";
 
 export type DepsLoad =
   & { noCache: boolean; cacheFile: string }
-  & DepFs<'readFile'>
+  & DepFs<"readFile">;
 
 export type DepsSave =
   & { cacheFile: string; noCache: boolean }
-  & DepFs<'writeFile'>
+  & DepFs<"writeFile">;
 
 export const loadCacheFromFile: RTE.ReaderTaskEither<
   DepsLoad,
@@ -36,7 +36,7 @@ export const loadCacheFromFile: RTE.ReaderTaskEither<
     ),
     RTE.chainFirstIOK((c) => loggerIO.debug(`loaded cache: ${Cache.keysCount(c)} items`)),
   )
-)
+);
 
 export const saveCacheToFile = <S extends { cache: Cache.LookupCache }>(
   state: S,
@@ -47,6 +47,6 @@ export const saveCacheToFile = <S extends { cache: Cache.LookupCache }>(
         ? RTE.of(constVoid())
         : Cache.trySaveFile(state.cache)(deps.cacheFile)
     ),
-    debugTimeRTE('saveCache'),
-  )
-}
+    debugTimeRTE("saveCache"),
+  );
+};

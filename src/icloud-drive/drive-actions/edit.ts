@@ -154,20 +154,19 @@ const handleMeowFile = (_tempfile: string): DriveLookup.Lookup<void, Deps> => {
   );
 };
 
-const spawnVim = ({ tempfile, editor }: { tempfile: string; editor: string }) =>
-  (): Promise<NodeJS.Signals | null> => {
-    return new Promise(
-      (resolve, reject) => {
-        child_process
-          .spawn(editor, [tempfile], {
-            stdio: "inherit",
-          })
-          .on("close", (code, signal) => {
-            if (code === 0) {
-              return resolve(signal);
-            }
-            return reject(code);
-          });
-      },
-    );
-  };
+const spawnVim = ({ tempfile, editor }: { tempfile: string; editor: string }) => (): Promise<NodeJS.Signals | null> => {
+  return new Promise(
+    (resolve, reject) => {
+      child_process
+        .spawn(editor, [tempfile], {
+          stdio: "inherit",
+        })
+        .on("close", (code, signal) => {
+          if (code === 0) {
+            return resolve(signal);
+          }
+          return reject(code);
+        });
+    },
+  );
+};

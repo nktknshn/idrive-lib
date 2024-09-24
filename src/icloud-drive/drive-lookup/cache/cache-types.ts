@@ -1,24 +1,27 @@
-import * as CT from '../../drive-types'
+import * as CT from "../../drive-types";
 
 /** Cache is just a key-val storage for folders details */
 export interface Cache {
-  readonly byDrivewsid: { readonly [drivewsid: string]: CacheEntity }
+  readonly byDrivewsid: { readonly [drivewsid: string]: CacheEntity };
 }
 
-export type CacheEntityAppLibrary = CacheEntityAppLibraryDetails
+export type CacheEntityAppLibrary = CacheEntityAppLibraryDetails;
 
 export type CacheEntity =
   | CacheEntityFolderRootDetails
   | CacheEntityFolderTrashDetails
   | CacheEntityFolderDetails
-  | CacheEntityAppLibraryDetails
+  | CacheEntityAppLibraryDetails;
 
-export type CacheEntityWithParentId = Exclude<CacheEntity, CacheEntityFolderTrashDetails | CacheEntityFolderRootDetails>
+export type CacheEntityWithParentId = Exclude<
+  CacheEntity,
+  CacheEntityFolderTrashDetails | CacheEntityFolderRootDetails
+>;
 
-export type ICloudDriveCacheEntityType = CacheEntity['type']
+export type ICloudDriveCacheEntityType = CacheEntity["type"];
 
 export class CacheEntityFolderRootDetails {
-  readonly type = 'ROOT'
+  readonly type = "ROOT";
   // readonly hasDetails = true
   constructor(
     public readonly content: CT.DetailsDocwsRoot,
@@ -27,7 +30,7 @@ export class CacheEntityFolderRootDetails {
 }
 
 export class CacheEntityFolderTrashDetails {
-  readonly type = 'TRASH_ROOT'
+  readonly type = "TRASH_ROOT";
   // readonly hasDetails = true
   constructor(
     public readonly content: CT.DetailsTrashRoot,
@@ -36,7 +39,7 @@ export class CacheEntityFolderTrashDetails {
 }
 
 export class CacheEntityFolderDetails {
-  readonly type = 'FOLDER'
+  readonly type = "FOLDER";
   // readonly hasDetails = true
 
   constructor(
@@ -46,7 +49,7 @@ export class CacheEntityFolderDetails {
 }
 
 export class CacheEntityAppLibraryDetails {
-  readonly type = 'APP_LIBRARY'
+  readonly type = "APP_LIBRARY";
   // readonly hasDetails = true
 
   constructor(
@@ -56,12 +59,12 @@ export class CacheEntityAppLibraryDetails {
 }
 
 export const hasParentId = (entity: CacheEntity): entity is CacheEntityWithParentId =>
-  !isDocwsRootCacheEntity(entity) && !isTrashCacheEntity(entity)
+  !isDocwsRootCacheEntity(entity) && !isTrashCacheEntity(entity);
 
 export const isDocwsRootCacheEntity = (
   entity: CacheEntity,
-): entity is CacheEntityFolderRootDetails => entity.type === 'ROOT'
+): entity is CacheEntityFolderRootDetails => entity.type === "ROOT";
 
 export const isTrashCacheEntity = (
   entity: CacheEntity,
-): entity is CacheEntityFolderTrashDetails => entity.type === 'TRASH_ROOT'
+): entity is CacheEntityFolderTrashDetails => entity.type === "TRASH_ROOT";

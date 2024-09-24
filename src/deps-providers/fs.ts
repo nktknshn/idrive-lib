@@ -1,1 +1,1 @@
-export * as fs from '../util/fs'
+export * as fs from "../util/fs";

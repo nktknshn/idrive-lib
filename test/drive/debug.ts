@@ -1,4 +1,4 @@
-import * as L from '../../src/logging'
+import * as L from "../../src/logging";
 
 export const enableDebug = (enable: boolean): void => {
   L.initLogging(
@@ -9,7 +9,7 @@ export const enableDebug = (enable: boolean): void => {
       L.stderrLogger,
       L.apiLogger,
     ],
-  )
-}
+  );
+};
 
-enableDebug(false)
+enableDebug(false);

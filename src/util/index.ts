@@ -1,1 +1,1 @@
-export * as SrteUtils from './srte-utils'
+export * as SrteUtils from "./srte-utils";
