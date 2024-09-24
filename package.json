@@ -1,6 +1,6 @@
 {
   "name": "idrive-lib",
-  "version": "1.0.0",
+  "version": "1.0.0-1",
   "description": "Unofficial iCloud Drive API client library",
   "main": "index.js",
   "types": "index.d.ts",
@@ -29,21 +29,19 @@
     "winston": "^3.14.2"
   },
   "devDependencies": {
-    "@types/prompts": "^2.4.9",
+    "@eslint/js": "^9.11.1",
+    "@types/eslint__js": "^8.42.3",
     "@types/micromatch": "^4.0.9",
     "@types/mime-types": "2.1.4",
     "@types/node": "^22.5.5",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "typescript-eslint": "^8.3.0",
-    "@eslint/js": "^9.9.1",
-    "@types/eslint__js": "^8.42.3",
+    "@types/prompts": "^2.4.9",
+    "@vitest/coverage-istanbul": "^2.0.5",
     "dprint": "^0.18.2",
     "eslint": "^9.11.1",
     "ts-loader": "^9.5.1",
-    "vitest": "^2.1.1",
-    "@vitest/coverage-istanbul": "^2.0.5",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.7.0",
+    "vitest": "^2.1.1"
   },
   "peerDependencies": {
     "chalk": "^4.1.2",
