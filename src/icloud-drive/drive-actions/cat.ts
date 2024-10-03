@@ -8,7 +8,7 @@ import { err } from "../../util/errors";
 import { getUrlStream } from "../../util/http/getUrlStream";
 import { normalizePath } from "../../util/normalize-path";
 import { consumeStreamToString } from "../../util/util";
-import { DriveLookup } from "..";
+import { DriveLookup, Types } from "..";
 import { DepApiMethod, DriveApiMethods } from "../drive-api";
 import { isFile } from "../drive-types";
 
@@ -22,18 +22,27 @@ export const cat = (
 ): DriveLookup.Lookup<string, Deps> => {
   const npath = pipe(path, normalizePath);
 
+  const handleFile = (item: Types.DriveChildrenItemFile) =>
+    pipe(
+      DriveApiMethods.getDriveItemUrl<DriveLookup.State>(item),
+      SRTE.chainOptionK(() => err(`cannot get url`))(O.fromNullable),
+      SRTE.chainW((url) =>
+        SRTE.fromReaderTaskEither(
+          pipe(
+            getUrlStream({ url }),
+            RTE.chainTaskEitherK(consumeStreamToString),
+          ),
+        )
+      ),
+    );
+
   return pipe(
     DriveLookup.getByPathStrictDocwsroot(npath),
     SRTE.filterOrElse(isFile, () => err(`you cannot cat a directory`)),
-    SRTE.chainW((item) => DriveApiMethods.getDriveItemUrl(item)),
-    SRTE.chainOptionK(() => err(`cannot get url`))(O.fromNullable),
-    SRTE.chainW((url) =>
-      SRTE.fromReaderTaskEither(
-        pipe(
-          getUrlStream({ url }),
-          RTE.chainTaskEitherK(consumeStreamToString),
-        ),
-      )
+    SRTE.chainW((item) =>
+      item.size === 0
+        ? SRTE.of("")
+        : handleFile(item)
     ),
   );
 };
