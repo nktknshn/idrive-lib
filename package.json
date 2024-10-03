@@ -1,6 +1,6 @@
 {
   "name": "idrive-lib",
-  "version": "1.0.0-1",
+  "version": "0.0.1",
   "description": "Unofficial iCloud Drive API client library",
   "main": "index.js",
   "types": "index.d.ts",
