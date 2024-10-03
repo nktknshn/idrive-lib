@@ -9,6 +9,14 @@ export { type Deps as DownloadDeps, downloadShallow } from "./download/download-
 export { listRecursive } from "./ls/ls-recursive";
 export { listRecursiveTree } from "./ls/ls-tree";
 
+export type {
+  ListRecursiveTreeResult,
+  ListShallowFile,
+  ListShallowFolder,
+  ListShallowInvalid,
+  ListShallowResult,
+} from "./ls";
+
 export {
   listShallow,
   type ListShallowFile as ListPathsFile,
@@ -26,10 +34,4 @@ export { type Deps as DepsUploadFolder, uploadFolder } from "./upload/upload-fol
 
 export { type Deps as DepsDownloadFiles, downloadFiles } from "./download/download-files";
 
-export type {
-  ListRecursiveTreeResult,
-  ListShallowFile,
-  ListShallowFolder,
-  ListShallowInvalid,
-  ListShallowResult,
-} from "./ls";
+export { type Deps as DepsRecentDocs, recentDocs } from "./recent-docs";

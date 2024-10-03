@@ -18,3 +18,5 @@ export {
   upload,
   type UploadResponse,
 } from "./upload";
+
+export { recentDocs, type RecentDocsResponse } from "./recentDocs";

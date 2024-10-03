@@ -106,21 +106,25 @@ export const cacheLogger = winston.createLogger({
   transports: [loggingLevels.infoToStderr],
 });
 
+const fileLogger = new winston.transports.File({
+  filename: "/tmp/idrive-http-log.json",
+  options: { flags: "w" },
+  // tailable: true
+  // format: ''
+  format: combine(prettyPrint({
+    colorize: false,
+    depth: 128,
+  })),
+  silent: true,
+  lazy: true,
+  // prettyPrint()
+});
+
 const httpfilelogger = winston.createLogger({
   level: "debug",
   silent: true,
   transports: [
-    // new winston.transports.File({
-    //   filename: "/tmp/http-log.json",
-    //   options: { flags: "w" },
-    //   // tailable: true
-    //   // format: ''
-    //   format: combine(prettyPrint({
-    //     colorize: false,
-    //     depth: 128,
-    //   })),
-    //   // prettyPrint()
-    // }),
+    fileLogger,
   ],
 });
 
@@ -133,7 +137,7 @@ export const defaultLoggers = [
 ];
 
 export const initLogging = (
-  args: { debug: boolean },
+  args: { debug: boolean; logHttp?: boolean },
   loggers: winston.Logger[] = defaultLoggers,
 ): void => {
   for (const logger of loggers) {
@@ -142,6 +146,11 @@ export const initLogging = (
         ? loggingLevels.debug
         : loggingLevels.info,
     );
+  }
+
+  if (args.logHttp === true) {
+    fileLogger.silent = false;
+    httpfilelogger.silent = false;
   }
 };
 

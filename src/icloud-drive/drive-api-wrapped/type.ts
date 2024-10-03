@@ -4,6 +4,7 @@ import {
   CreateFoldersResponse,
   MoveItemToTrashResponse,
   PutBackItemsFromTrashResponse,
+  RecentDocsResponse,
   RenameResponse,
 } from "../drive-requests";
 import { DownloadResponseBody } from "../drive-requests/download";
@@ -81,4 +82,8 @@ export type DriveApiWrapped = {
   updateDocuments: <S extends AuthenticatedState>(
     { zone, data }: { zone: string; data: UpdateDocumentsRequest },
   ) => SA<S, UpdateDocumentsResponse>;
+
+  recentDocs: <S extends AuthenticatedState>(
+    { limit }: { limit: number },
+  ) => SA<S, RecentDocsResponse>;
 };

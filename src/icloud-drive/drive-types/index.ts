@@ -90,6 +90,8 @@ export interface InvalidId extends TypeOf<typeof types.invalidIdItem> {}
 
 export type MaybeInvalidId<T> = InvalidId | T;
 
+export type RecentDoc = TypeOf<typeof types.recentDoc>;
+
 export const isNotInvalidId = <T>(i: T | InvalidId): i is T => !types.invalidIdItem.is(i);
 export const isInvalidId = <T>(i: T | InvalidId): i is InvalidId => types.invalidIdItem.is(i);
 

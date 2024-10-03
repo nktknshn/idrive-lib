@@ -21,3 +21,5 @@ export const download = apiMethod((_: DepWrappedApi<"download">) => _.api.downlo
 export const downloadBatch = apiMethod((_: DepWrappedApi<"downloadBatch">) => _.api.downloadBatch);
 
 export const createFolders = apiMethod((_: DepWrappedApi<"createFolders">) => _.api.createFolders);
+
+export const recentDocs = apiMethod((_: DepWrappedApi<"recentDocs">) => _.api.recentDocs);

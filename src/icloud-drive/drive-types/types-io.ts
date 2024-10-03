@@ -235,3 +235,5 @@ export const driveDetails = t.union([
   detailsAppLibrary,
   detailsTrash,
 ]);
+
+export const recentDoc = omit("dateCreated", itemFile);
