@@ -4,6 +4,7 @@ import { normalizePath, Path } from "../../util/path";
 import { DriveLookup, Types } from "..";
 import { fileName, fileNameAddSlash } from "../drive-types";
 
+// TODO ignore invalid path
 export const autocomplete = ({ path, trash, file, dir }: {
   path?: string;
   trash: boolean;
