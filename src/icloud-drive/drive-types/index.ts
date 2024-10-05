@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import * as A from "fp-ts/Array";
+import * as A from "fp-ts/lib/Array";
 import * as Ord from "fp-ts/lib/Ord";
 
-import { boolean, date, number, string } from "fp-ts";
+// import { boolean, date, number, string } from "fp-ts/lib";
+import * as boolean from "fp-ts/lib/boolean";
+import * as date from "fp-ts/lib/Date";
+import * as number from "fp-ts/lib/number";
+import * as string from "fp-ts/lib/string";
+
 import * as O from "fp-ts/lib/Option";
 import * as t from "io-ts";
 import { TypeOf } from "io-ts";

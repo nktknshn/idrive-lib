@@ -1,6 +1,5 @@
 /** High-level actions for iCloud Drive. */
 
-export { autocomplete } from "./autocomplete";
 export { cat, type Deps as DepsCat } from "./cat";
 export { type Deps as DepsDownloadFolder, downloadFolder as downloadFolder } from "./download/download-folder";
 export { type Deps as DepsDownloadRecursive, downloadRecursive } from "./download/download-recursive";
@@ -34,4 +33,5 @@ export { type Deps as DepsUploadFolder, uploadFolder } from "./upload/upload-fol
 
 export { type Deps as DepsDownloadFiles, downloadFiles } from "./download/download-files";
 
+export { autocomplete } from "./autocomplete";
 export { type Deps as DepsRecentDocs, recentDocs } from "./recent-docs";

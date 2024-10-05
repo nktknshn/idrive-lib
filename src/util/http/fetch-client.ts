@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method, ResponseType } from "axios";
 import FormData from "form-data";
-import { random } from "fp-ts";
 import { flow, pipe } from "fp-ts/lib/function";
 import { Predicate } from "fp-ts/lib/Predicate";
+import { randomInt } from "fp-ts/lib/Random";
 import * as TE from "fp-ts/lib/TaskEither";
 import { httpfilelogger } from "../../logging/logging";
 
@@ -125,7 +125,7 @@ export const failingFetch = (t = 90) =>
     fetchClient,
     TE.chainIOEitherK(resp => {
       return pipe(
-        random.randomInt(0, 100),
+        randomInt(0, 100),
         IO.map(n =>
           n > t
             ? E.of(resp)
